@@ -1,157 +1,82 @@
-# ForoHub API - Challenge Alura
+<div align="center">
 
-API REST desarrollada con **Spring Boot 3** para la gestión de tópicos de un foro.
-Este proyecto fue realizado como parte del **Challenge Back-End de Alura Latam (Oracle Next Education)**.
+# ForoHub API 💬
 
-La aplicación permite autenticar usuarios mediante **JWT (JSON Web Token)** y realizar operaciones CRUD sobre los tópicos del foro.
+**API REST para la gestión de tópicos de un foro, con autenticación JWT y persistencia en MySQL.**
 
----
+![Java](https://img.shields.io/badge/Java-17-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.x-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![JWT](https://img.shields.io/badge/Auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white)
 
-# Tecnologías utilizadas
+</div>
 
-* Java 17
-* Spring Boot 3
-* Spring Security
-* JWT (JSON Web Token)
-* Spring Data JPA
-* Hibernate
-* Flyway
-* MySQL
-* Maven
-* Insomnia (para pruebas de la API)
+## Sobre el proyecto
 
----
+ForoHub es una API REST desarrollada como parte del **Challenge Back-End de Alura Latam / Oracle Next Education**. El proyecto permite autenticar usuarios y administrar tópicos mediante endpoints protegidos, aplicando conceptos de seguridad, persistencia, validación y migraciones de base de datos.
 
-# Autenticación
+## Funcionalidades
 
-La API utiliza autenticación basada en **JWT**.
+- Autenticación de usuarios mediante **JSON Web Token (JWT)**.
+- Creación de tópicos.
+- Listado de tópicos.
+- Actualización de tópicos existentes.
+- Eliminación de tópicos.
+- Protección de endpoints con **Spring Security**.
+- Persistencia mediante **Spring Data JPA / Hibernate**.
+- Migraciones de base de datos con **Flyway**.
 
-Primero se debe obtener un token mediante el endpoint `/login`.
-Luego ese token debe enviarse en las demás solicitudes mediante el header:
+## Tecnologías
 
-```
+`Java 17` · `Spring Boot` · `Spring Security` · `Spring Data JPA` · `Hibernate` · `Flyway` · `MySQL` · `JWT` · `Maven`
+
+## Endpoints principales
+
+| Método | Endpoint | Descripción |
+|---|---|---|
+| `POST` | `/login` | Autenticar usuario y obtener token JWT |
+| `POST` | `/topicos` | Crear un tópico |
+| `GET` | `/topicos` | Listar tópicos |
+| `PUT` | `/topicos/{id}` | Actualizar un tópico |
+| `DELETE` | `/topicos/{id}` | Eliminar un tópico |
+
+Los endpoints protegidos requieren el token en el encabezado:
+
+```http
 Authorization: Bearer TOKEN
 ```
 
----
+## Configuración local
 
-# Endpoints
+El proyecto utiliza variables de entorno para evitar almacenar credenciales y secretos en el repositorio:
 
-## Login
-
-**POST** `/login`
-
-Body:
-
-```json
-{
-  "login": "usuario",
-  "clave": "password"
-}
+```text
+DB_URL=jdbc:mysql://localhost:3306/forohub_api
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_password
+JWT_SECRET=un_secreto_seguro
+JWT_EXPIRATION=2
 ```
 
-Respuesta:
+Después de configurar MySQL y las variables de entorno, el proyecto puede ejecutarse con Maven o desde el IDE.
 
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
+## Qué demuestra este proyecto
 
----
+- Diseño y consumo de una **API REST**.
+- Autenticación y autorización con **JWT + Spring Security**.
+- Modelado y persistencia de datos con JPA.
+- Gestión de esquema mediante migraciones.
+- Separación de responsabilidades en una aplicación backend.
+- Manejo seguro de configuración sensible mediante variables de entorno.
 
-# Crear tópico
+## Contexto
 
-**POST** `/topicos`
-
-Header requerido:
-
-```
-Authorization: Bearer TOKEN
-```
-
-Body:
-
-```json
-{
-  "titulo": "Error al configurar Spring Security",
-  "mensaje": "Estoy teniendo problemas al configurar autenticación JWT en mi proyecto Spring Boot. ¿Alguien podría orientarme?",
-  "autor": "Usuario",
-  "curso": "Spring Boot"
-}
-```
-
-Respuesta:
-
-```
-201 Created
-```
+Proyecto formativo desarrollado durante el programa **Oracle Next Education + Alura Latam** y conservado como parte de mi evolución en desarrollo backend.
 
 ---
 
-# Listar tópicos
+<div align="center">
 
-**GET** `/topicos`
+Desarrollado por **Bárbara Jopia Castro** · `BarbiDev`
 
-Respuesta:
-
-```json
-[
-  {
-    "id": 1,
-    "titulo": "Error al configurar Spring Security",
-    "mensaje": "Estoy teniendo problemas al configurar autenticación JWT en mi proyecto Spring Boot.",
-    "autor": "Usuario",
-    "curso": "Spring Boot"
-  }
-]
-```
-
----
-
-# Actualizar tópico
-
-**PUT** `/topicos/{id}`
-
-Body:
-
-```json
-{
-  "titulo": "Configuración de JWT en Spring Boot",
-  "mensaje": "He avanzado en la configuración pero aún tengo dudas sobre los filtros de seguridad.",
-  "autor": "Usuario",
-  "curso": "Spring Boot"
-}
-```
-
----
-
-# Eliminar tópico
-
-**DELETE** `/topicos/{id}`
-
-Respuesta:
-
-```
-204 No Content
-```
-
----
-
-# Seguridad
-
-La API está protegida mediante **Spring Security** y **JWT**.
-
-Flujo de autenticación:
-
-1. El usuario envía sus credenciales a `/login`.
-2. El servidor valida las credenciales.
-3. Se genera un **token JWT**.
-4. El cliente utiliza ese token para acceder a los endpoints protegidos.
-
----
-
-# Autor
-
-Proyecto desarrollado por **Bárbara Jopia Castro**
-Programa **Oracle Next Education + Alura Latam**
+</div>
